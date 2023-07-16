@@ -1,5 +1,4 @@
 import personal
-
 from googleapiclient.discovery import build
 
 def get_channel_statisitcs(yt_channel_id, yt_api_key=personal.yt_api_key):
