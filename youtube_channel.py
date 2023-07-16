@@ -2,18 +2,17 @@ import personal
 
 from googleapiclient.discovery import build
 
-"""
-api_service_name = 'youtube'
-api_version = 'v3'
+def get_channel_statisitcs(yt_channel_id, yt_api_key=personal.yt_api_key):
+    api_service_name = 'youtube'
+    api_version = 'v3'
 
-youtube = build(api_service_name, api_version, developerKey=personal.yt_api_key)
+    youtube = build(api_service_name, api_version, developerKey=yt_api_key)
 
-request = youtube.channels().list(
-        part='statistics',
-        id=personal.yt_id
-    )
+    request = youtube.channels().list(
+            part='statistics',
+            id=yt_channel_id
+        )
 
-response = request.execute()
+    response = request.execute()
 
-print(response)
-"""
+    return response
