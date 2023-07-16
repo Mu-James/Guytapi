@@ -15,4 +15,4 @@ def get_subscriptions_at_datetime(yt_channel_id, yt_api_key=personal.yt_api_key)
 
     response = request.execute()
 
-    print(response)
+    return response
