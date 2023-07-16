@@ -2,6 +2,7 @@ import personal
 
 from googleapiclient.discovery import build
 
+"""
 api_service_name = 'youtube'
 api_version = 'v3'
 
@@ -15,3 +16,4 @@ request = youtube.channels().list(
 response = request.execute()
 
 print(response)
+"""
