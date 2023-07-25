@@ -4,6 +4,9 @@ from urllib.parse import urlparse
 YT_URL = "www.youtube.com"
 YT_URL_SHORT = "youtu.be"
 
+class NotYoutubeHostException(Exception):
+    pass
+
 def _generate_request(url):
     try:
         return urllib.request.Request(url)
@@ -25,6 +28,11 @@ def extract_youtube_video_id_from_url(url):
 
         if host == YT_URL or host == YT_URL_SHORT:
             return _get_video_id(_get_url_query(url))
+        else:
+            raise NotYoutubeHostException
+
+    except NotYoutubeHostException:
+        print("Exception occurred: Not Youtube Link")
 
     except Exception as e:
         raise e
