@@ -5,9 +5,10 @@ def _generate_request(url):
         return urllib.request.Request(url)
     except Exception as e:
         raise e
+    
+def _get_host(url):
+    return _generate_request(url).origin_req_host
 
 def extract_youtube_video_id_from_url(url):
-    try:
-        yt_url = _generate_request(url)
-    except Exception as error:
-        print(error)
+    host = _get_host(url)
+
