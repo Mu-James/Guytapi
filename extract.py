@@ -1,7 +1,10 @@
 import urllib.request
 
 def _generate_request(url):
-    return urllib.request.Request(url)
+    try:
+        return urllib.request.Request(url)
+    except Exception as e:
+        raise e
 
 def extract_youtube_video_id_from_url(url):
     try:
