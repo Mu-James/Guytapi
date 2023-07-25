@@ -5,7 +5,12 @@ YT_URL = "www.youtube.com"
 YT_URL_SHORT = "youtu.be"
 
 class NotYoutubeHostException(Exception):
-    pass
+    def __init__(self, *args, **kwargs):
+        message = "Exception occurred: Non-Youtube host detected"
+        super().__init__(message)
+
+    def __str__(self):
+        return(repr())
 
 def _generate_request(url):
     try:
@@ -30,9 +35,6 @@ def extract_youtube_video_id_from_url(url):
             return _get_video_id(_get_url_query(url))
         else:
             raise NotYoutubeHostException
-
-    except NotYoutubeHostException:
-        print("Exception occurred: Not Youtube Link")
 
     except Exception as e:
         raise e
