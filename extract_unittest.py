@@ -47,6 +47,14 @@ class TestGetHost(ut.TestCase):
     def test_get_host_yt_video_shortened(self):
         self.assertEqual(e._get_host("https://youtu.be/Iz3K7wkJx4E"), "youtu.be") 
 
+class TestGetYTVideoID(ut.TestCase):
+    def test_extract_yt_video_id_from_url(self):
+        self.assertEqual(e.extract_youtube_video_id_from_url("https://www.youtube.com/watch?v=XxbJw8PrIkc"), "XxbJw8PrIkc")
+
+    def test_extract_yt_video_id_from_url_wrong_host(self):
+        with self.assertRaises(e.NotYoutubeHostException):
+            e.extract_youtube_video_id_from_url("www.google.com")
+
 if __name__ == "__main__":
     ut.main()
     
