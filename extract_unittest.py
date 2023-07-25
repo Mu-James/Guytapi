@@ -4,9 +4,22 @@ import extract as e
 
 class TestExtractMethods(ut.TestCase):
 
-    def test_generate_url(self):
+    def test_generate_url_general(self):
+        e._generate_request("https://www.google.com/")
+        self.assertEqual(True, True)
+
+    def test_generate_url_yt(self):
+        e._generate_request("https://www.youtube.com/")
+        self.assertEqual(True, True)
+
+    def test_generate_url_yt_video(self):
         e._generate_request("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
         self.assertEqual(True, True)
+
+    def test_generate_url_yt_channel(self):
+        e._generate_request("https://www.youtube.com/@YouTube")
+        self.assertEqual(True, True)
+
 
 
 if __name__ == "__main__":
