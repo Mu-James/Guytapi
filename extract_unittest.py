@@ -20,7 +20,10 @@ class TestExtractMethods(ut.TestCase):
         e._generate_request("https://www.youtube.com/@YouTube")
         self.assertEqual(True, True)
 
-
-
+    def test_generate_url_invalid_general(self):
+        with self.assertRaises(Exception):
+            e._generate_request("google")
+        
+        
 if __name__ == "__main__":
     ut.main()
