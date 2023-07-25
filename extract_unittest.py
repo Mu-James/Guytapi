@@ -12,8 +12,16 @@ class TestExtractMethods(ut.TestCase):
         e._generate_request("https://www.youtube.com/")
         self.assertEqual(True, True)
 
+    def test_generate_url_yt_shortened(self):
+        e._generate_request("http://youtu.be/")
+        self.assertEqual(True, True)
+
     def test_generate_url_yt_video(self):
         e._generate_request("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+        self.assertEqual(True, True)
+
+    def test_generate_url_yt_video_shortened(self):
+        e._generate_request("https://youtu.be/bKjAj9Lc674")
         self.assertEqual(True, True)
 
     def test_generate_url_yt_channel(self):
@@ -24,6 +32,6 @@ class TestExtractMethods(ut.TestCase):
         with self.assertRaises(Exception):
             e._generate_request("google")
         
-        
+
 if __name__ == "__main__":
     ut.main()
