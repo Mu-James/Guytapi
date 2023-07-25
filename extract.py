@@ -1,4 +1,8 @@
 import urllib.request
+from urllib.parse import urlparse
+
+YT_URL = "www.youtube.com"
+YT_URL_SHORT = "youtu.be"
 
 def _generate_request(url):
     try:
@@ -7,8 +11,20 @@ def _generate_request(url):
         raise e
     
 def _get_host(url):
-    return _generate_request(url).origin_req_host
+    return urlparse(url).hostname
+
+def _get_video_id(query):
+    return query[2:]
+
+def _get_url_query(url):
+    return urlparse(url).query
 
 def extract_youtube_video_id_from_url(url):
-    host = _get_host(url)
+    try:
+        host = _get_host(url)
 
+        if host == YT_URL or host == YT_URL_SHORT:
+            return _get_video_id(_get_url_query(url))
+
+    except Exception as e:
+        raise e
