@@ -1,7 +1,8 @@
 import personal
+import extract as e
 from build import build_youtube
 
-def get_all_channel_public_playlists(yt_channel_id, yt_api_key=personal.yt_api_key):
+def get_all_channel_public_playlists_using_id(yt_channel_id, yt_api_key=personal.yt_api_key):
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlists().list(
@@ -14,7 +15,7 @@ def get_all_channel_public_playlists(yt_channel_id, yt_api_key=personal.yt_api_k
 
     return response
 
-def get_playlist_data(playlist_id, yt_api_key=personal.yt_api_key):
+def get_playlist_data_using_id(playlist_id, yt_api_key=personal.yt_api_key):
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlists().list(
@@ -26,7 +27,7 @@ def get_playlist_data(playlist_id, yt_api_key=personal.yt_api_key):
 
     return response
 
-def print_playlist_video_titles(playlist_id, yt_api_key=personal.yt_api_key):
+def print_playlist_video_titles_using_id(playlist_id, yt_api_key=personal.yt_api_key):
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlistItems().list(
