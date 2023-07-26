@@ -18,7 +18,7 @@ def _generate_request(url):
 def _get_host(url):
     return urlparse(url).hostname
 
-def _get_id(query):
+def _get_video_id(query):
     return query[2:]
 
 def _get_url_query(url):
@@ -29,7 +29,7 @@ def extract_youtube_video_id_from_url(url):
         host = _get_host(url)
 
         if host == YT_URL or host == YT_URL_SHORT:
-            return _get_id(_get_url_query(url))
+            return _get_video_id(_get_url_query(url))
         else:
             raise NotYoutubeHostException
 
