@@ -21,6 +21,9 @@ def _get_host(url):
 def _get_video_id(query):
     return query[2:]
 
+def _get_playlist_id(query):
+    return query[5:]
+
 def _get_url_query(url):
     return urlparse(url).query
 
