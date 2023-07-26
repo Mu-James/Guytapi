@@ -9,9 +9,6 @@ class NotYoutubeHostException(Exception):
         message = "Exception occurred: Non-Youtube host detected"
         super().__init__(message)
 
-    def __str__(self):
-        return(repr())
-
 def _generate_request(url):
     try:
         return urllib.request.Request(url)
