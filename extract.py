@@ -44,7 +44,7 @@ def extract_youtube_playlist_id_from_url(url):
         host = _get_host(url)
 
         if host == YT_URL or host == YT_URL_SHORT:
-            return _get_id(_get_url_query(url))
+            return _get_playlist_id(_get_url_query(url))
         else:
             raise NotYoutubeHostException
         
