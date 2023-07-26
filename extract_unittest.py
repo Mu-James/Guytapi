@@ -54,6 +54,14 @@ class TestGetYTVideoID(ut.TestCase):
         with self.assertRaises(e.NotYoutubeHostException):
             e.extract_youtube_video_id_from_url("www.google.com")
 
+class TestGetYTPlaylistID(ut.TestCase):
+    def test_extract_yt_video_id_from_url(self):
+        self.assertEqual(e.extract_youtube_playlist_id_from_url("https://www.youtube.com/playlist?list=PL1qnH1TrDn6vdogf2DKrQy2lnyo_HvTdj"), "PL1qnH1TrDn6vdogf2DKrQy2lnyo_HvTdj")
+
+    def test_extract_yt_video_id_from_url_wrong_host(self):
+        with self.assertRaises(e.NotYoutubeHostException):
+            e.extract_youtube_playlist_id_from_url("www.google.com")
+            
 if __name__ == "__main__":
     ut.main()
     
