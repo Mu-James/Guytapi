@@ -1,7 +1,6 @@
 import unittest as ut
 import extract as e
 
-
 class TestGeneratetUrl(ut.TestCase):
     def test_generate_url_general(self):
         e._generate_request("https://www.google.com/")
