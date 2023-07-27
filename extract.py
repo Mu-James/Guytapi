@@ -1,8 +1,10 @@
 import urllib.request
 from urllib.parse import urlparse
+import requests as r
 
 YT_URL = "www.youtube.com"
 YT_URL_SHORT = "youtu.be"
+_LEN_CHANNEL_ID_STRING = 12
 
 class NotYoutubeHostException(Exception):
     def __init__(self, *args, **kwargs):
@@ -54,7 +56,25 @@ def extract_youtube_playlist_id_from_url(url):
     except Exception as e:
         raise e
 
+
+def _get_http_response_text(url):
+    return r.get(url).text
+
+
+def _find_index_channel_id(response_text):
+    index = response_text.find("?channel_id=")
+    index += _LEN_CHANNEL_ID_STRING
+    return index
+
 def extract_youtube_channel_id_from_url(url):
-    response = _generate_request(url)
-    print(response)
+    id = ""
+
+    response = _get_http_response_text(url)
+    index = _find_index_channel_id(response)
+
+    while response[index] != '"':
+        id += response.text[index]
+        index += 1
+
+    return id
 
