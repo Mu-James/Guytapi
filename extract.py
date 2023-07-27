@@ -56,10 +56,8 @@ def extract_youtube_playlist_id_from_url(url):
     except Exception as e:
         raise e
 
-
 def _get_http_response_text(url):
     return r.get(url).text
-
 
 def _find_index_channel_id(response_text):
     index = response_text.find("?channel_id=")
