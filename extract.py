@@ -53,3 +53,8 @@ def extract_youtube_playlist_id_from_url(url):
         
     except Exception as e:
         raise e
+
+def extract_youtube_channel_id_from_url(url):
+    response = _generate_request(url)
+    print(response)
+
