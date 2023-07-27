@@ -71,7 +71,7 @@ def extract_youtube_channel_id_from_url(url):
     index = _find_index_channel_id(response)
 
     while response[index] != '"':
-        id += response.text[index]
+        id += response[index]
         index += 1
 
     return id
