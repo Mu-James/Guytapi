@@ -143,11 +143,12 @@ class YoutubeApiGUI:
         top_window.geometry(resolution)
         return top_window
     
-    def _create_entry(self, master, width):
+    def _create_entry(self, master, width, row, column):
         entry = tk.Entry(
             master = master,
             width = width
         )
+        entry.grid(row = row, column = column)
         return entry
 
 if __name__ == "__main__":
