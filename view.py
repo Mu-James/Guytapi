@@ -3,9 +3,10 @@ from tkinter import messagebox
 
 _DELETE_WINDOW_PROTCOL = "WM_DELETE_WINDOW",
 
-_LABLE_TEXT_WELCOME = "Welcome, please choose an option below:"
-_LABLE_TEXT_API_SELECTION = "Please select an API category below:"
-_LABLE_TEXT_NON_API_SELECTION = "Please select an option below:"
+_LABEL_TEXT_WELCOME = "Welcome, please choose an option below:"
+_LABEL_TEXT_API_SELECTION = "Please select an API category below:"
+_LABEL_TEXT_NON_API_SELECTION = "Please select an option below:"
+_LABEL_TEXT_VIDEOS_SELECTION = "Please select an action below:"
 
 _BUTTON_TEXT_API_RELATED = "API Related"
 _BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
@@ -37,7 +38,7 @@ class YoutubeApiGUI:
         self._root_window.geometry(_DEFAULT_RESOLUTION)
 
         #Labels
-        welcome = self._create_label(self._root_window, _LABLE_TEXT_WELCOME, 0, 0)
+        welcome = self._create_label(self._root_window, _LABEL_TEXT_WELCOME, 0, 0)
 
         #Buttons
         api_related = self._create_button(self._root_window, _BUTTON_TEXT_API_RELATED, 1, 0, self._open_api_selection)
@@ -62,7 +63,7 @@ class YoutubeApiGUI:
         self._root_window.withdraw()
 
         #Labels
-        selection = self._create_label(self._window_api_selection, _LABLE_TEXT_API_SELECTION, 0, 0)
+        selection = self._create_label(self._window_api_selection, _LABEL_TEXT_API_SELECTION, 0, 0)
 
         #Buttons
         select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
@@ -76,7 +77,7 @@ class YoutubeApiGUI:
         self._root_window.withdraw()
 
         #Labels
-        selection = self._create_label(self._window_non_api_selection, _LABLE_TEXT_NON_API_SELECTION, 0, 0)
+        selection = self._create_label(self._window_non_api_selection, _LABEL_TEXT_NON_API_SELECTION, 0, 0)
 
         #Buttons
         select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
