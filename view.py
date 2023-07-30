@@ -98,12 +98,11 @@ class YoutubeApiGUI:
 
     def _get_thumbnail_url(self):
         self._thumbnail_url = self._create_top_level_window(self._videos_selection, _WINDOW_TITLE_GET_THUMBNAIL_URL, _DEFAULT_RESOLUTION)
-        self._videos_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._thumbnail_url.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._videos_selection.withdraw()
 
         #Entries
-        url_entry = tk.Entry(self._thumbnail_url)
-
+        url_entry = self._create_entry(self._thumbnail_url, 50)
 
 
     def _back_to_previous_window(self, current, previous):
