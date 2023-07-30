@@ -52,6 +52,16 @@ class YoutubeApiGUI:
             column = column
         )
         return label
+    
+    def _create_messagebox(self, master, style, title, message):
+        exec(
+            f"""messagebox = tk.messagebox.{style}(
+                master = {master},
+                title = {title},
+                message = {message}
+            )
+            return messagebox"""
+        ) 
 
 if __name__ == "__main__":
     ytapigui = YoutubeApiGUI()
