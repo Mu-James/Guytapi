@@ -26,7 +26,7 @@ def get_video_view_count_id(video_id, yt_api_key=personal.yt_api_key):
     video = response['items']
     return video[0]['statistics']['viewCount']
 
-def get_video_view_count_url(url, yt_api_key, size):
+def get_video_view_count_url(url, size, yt_api_key):
     video_id = e.extract_youtube_video_id_from_url(url)
     return get_video_view_count_id(video_id, size, yt_api_key)
 
