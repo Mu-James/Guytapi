@@ -37,7 +37,7 @@ class YoutubeApiGUI:
         close = self._create_button(self._root_window, _BUTTON_TEXT_CLOSE, 3, 0, self._confirm_close_GUI)
         
     def run(self):
-        self._root_window.protocol( self._confirm_close_GUI)
+        self._root_window.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.mainloop()
 
     def _confirm_close_GUI(self):
@@ -50,12 +50,12 @@ class YoutubeApiGUI:
 
     def _open_api_selection(self):
         self.window_api_selection = self._create_top_level_window(_WINDOW_TITLE_API_SELECTION)
-        self.window_api_selection.protocol(_DELETE_WINDOW_PROTCOL,self._confirm_close_GUI)
+        self.window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.withdraw()
 
     def _open_non_api_selection(self):
         self.window_non_api_selection = self._create_top_level_window(_WINDOW_TITLE_NON_API_SELECTION)
-        self.window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL,self._confirm_close_GUI )
+        self.window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
         self._root_window.withdraw()
         
     def _create_button(self, master, text, row, column, command):
