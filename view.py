@@ -7,6 +7,8 @@ _LABEL_TEXT_WELCOME = "Welcome, please choose an option below:"
 _LABEL_TEXT_API_SELECTION = "Please select an API category below:"
 _LABEL_TEXT_NON_API_SELECTION = "Please select an option below:"
 _LABEL_TEXT_VIDEOS_SELECTION = "Please select an action below:"
+_LABEL_TEXT_ENTER_VIDEO_URL = "Enter a Youtube Video URL"
+_LABEL_TEXT_SELECT_THUMBNAIL_SIZE = "Select a thumbnail size"
 
 _BUTTON_TEXT_API_RELATED = "API Related"
 _BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
@@ -17,6 +19,12 @@ _BUTTON_TEXT_PLAYLISTS = "Playlists"
 _BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
 _BUTTON_TEXT_BACK = "Back"
 _BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
+
+_RADIOBUTTON_TEXT_DEFAULT = "Default"
+_RADIOBUTTON_TEXT_MEDIUM = "Medium"
+_RADIOBUTTON_TEXT_HIGH = "High"
+_RADIOBUTTON_TEXT_STANDARD = "Standard"
+
 
 _MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
 _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
@@ -101,8 +109,17 @@ class YoutubeApiGUI:
         self._thumbnail_url.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._videos_selection.withdraw()
 
+        #Labels
+        url_entry_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
+        select_size_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_SELECT_THUMBNAIL_SIZE, 1, 0)
+
         #Entries
-        url_entry = self._create_entry(self._thumbnail_url, 50)
+        url_entry = self._create_entry(self._thumbnail_url, 50, 0, 1)
+
+        #Radio Buttons
+        size_var = tk.IntVar()
+        default = tk.Radiobutton(self._thumbnail_url, text = _RADIOBUTTON_TEXT_DEFAULT, variable = size_var, value = 0)
+        default.grid(row = 1, column = 1)
 
 
     def _back_to_previous_window(self, current, previous):
