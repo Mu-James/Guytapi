@@ -2,7 +2,7 @@ import tkinter as tk
 
 _BUTTON_TEXT_API_RELATED = "API Related"
 _BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
-_WINDOW_TITLE = "Youtube API Application"
+_WINDOW_TITLE = "Youtube API GUI"
 _START_RESOLUTION = "512x512"
 _DEFAULT_FONT = "arial"
 
