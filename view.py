@@ -117,6 +117,7 @@ class YoutubeApiGUI:
         def _submit_inputs(video_url, size, yt_api_key):
             nonlocal tb_url
             tb_url = yv.get_video_thumbnail_url_url(video_url, size, yt_api_key)
+            result = self._create_textbox(self._thumbnail_url, 1, 50, 3, 1, tb_url, 'disabled')
 
         #Labels
         url_entry_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
@@ -138,8 +139,10 @@ class YoutubeApiGUI:
         size_drop.grid(row = 1, column = 1)
 
         #Buttons
-        submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var, p.yt_api_key))
+        submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), p.yt_api_key))
 
+        #Labels
+        
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
@@ -186,6 +189,20 @@ class YoutubeApiGUI:
         )
         entry.grid(row = row, column = column)
         return entry
+    
+    def _create_textbox(self, master, height, width, row, column, text, state):
+        textbox = tk.Text(
+            master = master,
+            height = height,
+            width = width
+        )
+        textbox.grid(
+            row = row,
+            column = column
+        )
+        textbox.insert('end', text)
+        textbox.config(state = state)
+        return textbox
 
 if __name__ == "__main__":
     ytapigui = YoutubeApiGUI()
