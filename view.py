@@ -85,7 +85,11 @@ class YoutubeApiGUI:
 
     def _open_videos_selection(self):
         self._videos_selection = self._create_top_level_window(self._window_api_selection, _WINDOW_TITLE_VIDEOS_SELECTION, _DEFAULT_RESOLUTION)
+        self._videos_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_api_selection.withdraw()
 
+        #Labels
+        selection = self._create_label(self._videos_selection, _LABEL_TEXT_VIDEOS_SELECTION, 0, 0)
 
 
     def _back_to_previous_window(self, current, previous):
