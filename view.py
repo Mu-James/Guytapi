@@ -39,7 +39,7 @@ class YoutubeApiGUI:
         response = self._create_messagebox("askyesno", _MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
         if response == True:
             self._root_window.destroy()
-        elif response == 0:
+        elif response == False:
             pass
 
     def _create_button(self, master, text, row, column, command):
