@@ -118,16 +118,15 @@ class YoutubeApiGUI:
 
         #Dropdown
         size_var = tk.StringVar()
-        size_var.set(_DROPDOWN_TEXT_DEFAULT)
         sizes = [
             _DROPDOWN_TEXT_DEFAULT,
             _DROPDOWN_TEXT_MEDIUM,
             _DROPDOWN_TEXT_HIGH,
             _DROPDOWN_TEXT_STANDARD
         ]
+        size_var.set(sizes[0])
         size_drop = tk.OptionMenu(self._thumbnail_url, size_var, *sizes)
         size_drop.grid(row = 1, column = 1)
-
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
