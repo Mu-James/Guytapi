@@ -20,10 +20,10 @@ _BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
 _BUTTON_TEXT_BACK = "Back"
 _BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
 
-_RADIOBUTTON_TEXT_DEFAULT = "Default"
-_RADIOBUTTON_TEXT_MEDIUM = "Medium"
-_RADIOBUTTON_TEXT_HIGH = "High"
-_RADIOBUTTON_TEXT_STANDARD = "Standard"
+_DROPDOWN_TEXT_DEFAULT = "Default"
+_DROPDOWN_TEXT_MEDIUM = "Medium"
+_DROPDOWN_TEXT_HIGH = "High"
+_DROPDOWN_TEXT_STANDARD = "Standard"
 
 
 _MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
@@ -116,10 +116,17 @@ class YoutubeApiGUI:
         #Entries
         url_entry = self._create_entry(self._thumbnail_url, 50, 0, 1)
 
-        #Radio Buttons
-        size_var = tk.IntVar()
-        default = tk.Radiobutton(self._thumbnail_url, text = _RADIOBUTTON_TEXT_DEFAULT, variable = size_var, value = 0)
-        default.grid(row = 1, column = 1)
+        #Dropdown
+        size_var = tk.StringVar()
+        size_var.set(_DROPDOWN_TEXT_DEFAULT)
+        sizes = [
+            _DROPDOWN_TEXT_DEFAULT,
+            _DROPDOWN_TEXT_MEDIUM,
+            _DROPDOWN_TEXT_HIGH,
+            _DROPDOWN_TEXT_STANDARD
+        ]
+        size_drop = tk.OptionMenu(self._thumbnail_url, size_var, *sizes)
+        size_drop.grid(row = 1, column = 1)
 
 
     def _back_to_previous_window(self, current, previous):
