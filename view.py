@@ -20,7 +20,7 @@ _WINDOW_TITLE_API_SELECTION = "Youtube API GUI: API Selection"
 _WINDOW_TITLE_NON_API_SELECTION = "Youtube API GUI: Non-API Selection"
 
 _WINDOW_TITLE_ROOT = "Youtube API GUI"
-_START_RESOLUTION = "512x512"
+_DEFAULT_RESOLUTION = "512x512"
 _DEFAULT_FONT = "Arial"
 
 def _dummy():
@@ -30,7 +30,7 @@ class YoutubeApiGUI:
     def __init__(self):
         self._root_window = tk.Tk()
         self._root_window.title(_WINDOW_TITLE_ROOT)
-        self._root_window.geometry(_START_RESOLUTION)
+        self._root_window.geometry(_DEFAULT_RESOLUTION)
 
         #Labels
         welcome = self._create_label(self._root_window, _LABLE_TEXT_WELCOME, 0, 0)
@@ -53,7 +53,7 @@ class YoutubeApiGUI:
             pass
 
     def _open_api_selection(self):
-        self._window_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_API_SELECTION)
+        self._window_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_API_SELECTION, _DEFAULT_RESOLUTION)
         self._window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.withdraw()
 
@@ -66,7 +66,7 @@ class YoutubeApiGUI:
         select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, _dummy)
 
     def _open_non_api_selection(self):
-        self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION)
+        self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION, _DEFAULT_RESOLUTION)
         self._window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
         self._root_window.withdraw()
         
@@ -98,9 +98,10 @@ class YoutubeApiGUI:
         exec(f'messagebox = tk.messagebox.{style}(title = "{title}", message = "{message}")', data)
         return data['messagebox']
     
-    def _create_top_level_window(self, root, title):
+    def _create_top_level_window(self, root, title, resolution):
         top_window = tk.Toplevel(root)
         top_window.title(title)
+        top_window.geometry(resolution)
         return top_window
 
 if __name__ == "__main__":
