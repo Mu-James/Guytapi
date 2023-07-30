@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
+import youtube_video as yv
+import personal as p
 
 _DELETE_WINDOW_PROTCOL = "WM_DELETE_WINDOW",
 
@@ -19,6 +21,7 @@ _BUTTON_TEXT_PLAYLISTS = "Playlists"
 _BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
 _BUTTON_TEXT_BACK = "Back"
 _BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
+_BUTTON_TEXT_GO = "Go"
 
 _DROPDOWN_TEXT_DEFAULT = "Default"
 _DROPDOWN_TEXT_MEDIUM = "Medium"
@@ -109,6 +112,12 @@ class YoutubeApiGUI:
         self._thumbnail_url.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._videos_selection.withdraw()
 
+        tb_url = None
+
+        def _submit_inputs(self, video_url, size, yt_api_key):
+            nonlocal tb_url
+            tb_url = yv.get_video_thumbnail_url_url(video_url, size, yt_api_key)
+
         #Labels
         url_entry_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
         select_size_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_SELECT_THUMBNAIL_SIZE, 1, 0)
@@ -127,6 +136,10 @@ class YoutubeApiGUI:
         size_var.set(sizes[0])
         size_drop = tk.OptionMenu(self._thumbnail_url, size_var, *sizes)
         size_drop.grid(row = 1, column = 1)
+
+        #Buttons
+        submit_inputs = self._create_label(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: self._submit_inputs(url_entry.get(), size_var, p.yt_api_key)
+
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
