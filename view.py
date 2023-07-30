@@ -16,6 +16,7 @@ _BUTTON_TEXT_CHANNELS = "Channels"
 _BUTTON_TEXT_PLAYLISTS = "Playlists"
 _BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
 _BUTTON_TEXT_BACK = "Back"
+_BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
 
 _MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
 _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
@@ -23,6 +24,7 @@ _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API 
 _WINDOW_TITLE_API_SELECTION = "Youtube API GUI: API Selection"
 _WINDOW_TITLE_NON_API_SELECTION = "Youtube API GUI: Non-API Selection"
 _WINDOW_TITLE_VIDEOS_SELECTION = "Youtube API GUI: Videos"
+_WINDOW_TITLE_GET_THUMBNAIL_URL = "Youtube API GUI: Video Thumbnail URL"
 
 _WINDOW_TITLE_ROOT = "Youtube API GUI"
 _DEFAULT_RESOLUTION = "512x512"
@@ -91,6 +93,18 @@ class YoutubeApiGUI:
         #Labels
         selection = self._create_label(self._videos_selection, _LABEL_TEXT_VIDEOS_SELECTION, 0, 0)
 
+        #Buttons
+        get_video_thumbnail_url = self._create_button(self._videos_selection, _BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
+
+    def _get_thumbnail_url(self):
+        self._thumbnail_url = self._create_top_level_window(self._videos_selection, _WINDOW_TITLE_GET_THUMBNAIL_URL, _DEFAULT_RESOLUTION)
+        self._videos_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._videos_selection.withdraw()
+
+        #Entries
+        url_entry = tk.Entry(self._thumbnail_url)
+
+
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
@@ -129,6 +143,13 @@ class YoutubeApiGUI:
         top_window.title(title)
         top_window.geometry(resolution)
         return top_window
+    
+    def _create_entry(self, master, width):
+        entry = tk.Entry(
+            master = master,
+            width = width
+        )
+        return entry
 
 if __name__ == "__main__":
     ytapigui = YoutubeApiGUI()
