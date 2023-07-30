@@ -14,6 +14,7 @@ _BUTTON_TEXT_VIDEOS = "Videos"
 _BUTTON_TEXT_CHANNELS = "Channels"
 _BUTTON_TEXT_PLAYLISTS = "Playlists"
 _BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
+_BUTTON_TEXT_BACK = "Back"
 
 _MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
 _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
@@ -66,6 +67,7 @@ class YoutubeApiGUI:
         select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
         select_playlists = self._create_button(self._window_api_selection, _BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
         select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, _dummy)
+        back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 4, 0, _dummy)
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION, _DEFAULT_RESOLUTION)
@@ -77,6 +79,7 @@ class YoutubeApiGUI:
 
         #Buttons
         select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
+        back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 2, 0, _dummy)
         
     def _create_button(self, master, text, row, column, command):
         button = tk.Button(
