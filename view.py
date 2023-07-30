@@ -114,7 +114,7 @@ class YoutubeApiGUI:
 
         tb_url = None
 
-        def _submit_inputs(self, video_url, size, yt_api_key):
+        def _submit_inputs(video_url, size, yt_api_key):
             nonlocal tb_url
             tb_url = yv.get_video_thumbnail_url_url(video_url, size, yt_api_key)
 
@@ -138,7 +138,7 @@ class YoutubeApiGUI:
         size_drop.grid(row = 1, column = 1)
 
         #Buttons
-        submit_inputs = self._create_label(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: self._submit_inputs(url_entry.get(), size_var, p.yt_api_key)
+        submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var, p.yt_api_key))
 
 
     def _back_to_previous_window(self, current, previous):
