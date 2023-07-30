@@ -21,6 +21,7 @@ _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API 
 
 _WINDOW_TITLE_API_SELECTION = "Youtube API GUI: API Selection"
 _WINDOW_TITLE_NON_API_SELECTION = "Youtube API GUI: Non-API Selection"
+_WINDOW_TITLE_VIDEOS_SELECTION = "Youtube API GUI: Videos"
 
 _WINDOW_TITLE_ROOT = "Youtube API GUI"
 _DEFAULT_RESOLUTION = "512x512"
@@ -66,7 +67,7 @@ class YoutubeApiGUI:
         #Buttons
         select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
         select_playlists = self._create_button(self._window_api_selection, _BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
-        select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, _dummy)
+        select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
         back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._root_window))
 
     def _open_non_api_selection(self):
@@ -80,6 +81,11 @@ class YoutubeApiGUI:
         #Buttons
         select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
         back = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
+
+    def _open_videos_selection(self):
+        self._videos_selection = self._create_top_level_window(self._window_api_selection, _WINDOW_TITLE_VIDEOS_SELECTION, _DEFAULT_RESOLUTION)
+
+
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
