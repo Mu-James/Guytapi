@@ -4,7 +4,7 @@ _BUTTON_TEXT_API_RELATED = "API Related"
 _BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
 _WINDOW_TITLE = "Youtube API GUI"
 _START_RESOLUTION = "512x512"
-_DEFAULT_FONT = "arial"
+_DEFAULT_FONT = "Arial"
 
 class YoutubeApiGUI:
     def __init__(self):
@@ -29,6 +29,14 @@ class YoutubeApiGUI:
             column = column,
         )
         return button
+    def _create_label(self, master, text, row, column):
+        label = tk.Label(
+            master = master,
+            text = text
+            row = row,
+            column = column
+        )
+        return label
 
 if __name__ == "__main__":
     ytapigui = YoutubeApiGUI()
