@@ -28,7 +28,6 @@ _DROPDOWN_TEXT_MEDIUM = "Medium"
 _DROPDOWN_TEXT_HIGH = "High"
 _DROPDOWN_TEXT_STANDARD = "Standard"
 
-
 _MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
 _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
 
