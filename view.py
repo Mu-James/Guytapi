@@ -62,14 +62,6 @@ class YoutubeApiGUI:
         self._root_window.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.mainloop()
 
-    def _confirm_close_GUI(self):
-        #response = tk.messagebox.askyesno(_MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
-        response = self._create_messagebox("askyesno", _MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
-        if response == True:
-            self._root_window.destroy()
-        elif response == False:
-            pass
-
     def _open_api_selection(self):
         self._window_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_API_SELECTION, _DEFAULT_RESOLUTION)
         self._window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
@@ -141,12 +133,17 @@ class YoutubeApiGUI:
         #Buttons
         submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), p.yt_api_key))
 
-        #Labels
-        
-
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
         previous.deiconify()
+
+    def _confirm_close_GUI(self):
+        #response = tk.messagebox.askyesno(_MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
+        response = self._create_messagebox("askyesno", _MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
+        if response == True:
+            self._root_window.destroy()
+        elif response == False:
+            pass
 
     def _create_button(self, master, text, row, column, command):
         button = tk.Button(
