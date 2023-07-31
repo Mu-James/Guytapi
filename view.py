@@ -48,6 +48,7 @@ class YoutubeApiGUI:
         self._root_window = tk.Tk()
         self._root_window.title(_WINDOW_TITLE_ROOT)
         self._root_window.geometry(_DEFAULT_RESOLUTION)
+        self._root_window.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
 
         #Labels
         welcome = self._create_label(self._root_window, _LABEL_TEXT_WELCOME, 0, 0)
@@ -58,7 +59,6 @@ class YoutubeApiGUI:
         close = self._create_button(self._root_window, _BUTTON_TEXT_CLOSE, 3, 0, self._confirm_close_GUI)
         
     def run(self):
-        self._root_window.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.mainloop()
 
     def _open_api_selection(self):
