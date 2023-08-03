@@ -1,3 +1,5 @@
+import googleapiclient as gac
+import google as g
 import build as b
 
 def verify_api_key(yt_api_key):
@@ -8,5 +10,7 @@ def verify_api_key(yt_api_key):
         )
         response = request.execute()
         return True
-    except Exception as e:
+    except gac.errors.HttpError as e:
         return e._get_reason()
+    except g.auth.exceptions.DefaultCredentialsError as e:
+        return e
