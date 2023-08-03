@@ -4,6 +4,8 @@ import build as b
 
 def verify_api_key(yt_api_key):
     try:
+        if yt_api_key == "":
+            return "Invalid key: Key cannot be empty"
         verify = b.build_youtube(yt_api_key)
         request = verify.i18nRegions().list(
             part="snippet"
