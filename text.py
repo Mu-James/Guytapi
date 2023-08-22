@@ -1,0 +1,38 @@
+_DELETE_WINDOW_PROTCOL = "WM_DELETE_WINDOW",
+
+_LABEL_TEXT_WELCOME = "Welcome, please choose an option below:"
+_LABEL_TEXT_ENTER_DATA_API_KEY = "Please enter your Youtube Data API Key below:"
+_LABEL_TEXT_API_SELECTION = "Please select an API category below:"
+_LABEL_TEXT_NON_API_SELECTION = "Please select an option below:"
+_LABEL_TEXT_VIDEOS_SELECTION = "Please select an action below:"
+_LABEL_TEXT_ENTER_VIDEO_URL = "Enter a Youtube Video URL"
+_LABEL_TEXT_SELECT_THUMBNAIL_SIZE = "Select a thumbnail size"
+
+_BUTTON_TEXT_API_RELATED = "API Related"
+_BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
+_BUTTON_TEXT_CLOSE = "Close"
+_BUTTON_TEXT_VIDEOS = "Videos"
+_BUTTON_TEXT_CHANNELS = "Channels"
+_BUTTON_TEXT_PLAYLISTS = "Playlists"
+_BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
+_BUTTON_TEXT_BACK = "Back"
+_BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
+_BUTTON_TEXT_GO = "Go"
+
+_DROPDOWN_TEXT_DEFAULT = "Default"
+_DROPDOWN_TEXT_MEDIUM = "Medium"
+_DROPDOWN_TEXT_HIGH = "High"
+_DROPDOWN_TEXT_STANDARD = "Standard"
+
+_MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
+_MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
+
+_WINDOW_TITLE_API_SELECTION = "Youtube API GUI: API Selection"
+_WINDOW_TITLE_ENTER_DATA_API_KEY = "Youtube API GUI: Enter API Key"
+_WINDOW_TITLE_NON_API_SELECTION = "Youtube API GUI: Non-API Selection"
+_WINDOW_TITLE_VIDEOS_SELECTION = "Youtube API GUI: Videos"
+_WINDOW_TITLE_GET_THUMBNAIL_URL = "Youtube API GUI: Video Thumbnail URL"
+
+_WINDOW_TITLE_ROOT = "Youtube API GUI"
+_DEFAULT_RESOLUTION = "512x512"
+_DEFAULT_FONT = "Arial"
