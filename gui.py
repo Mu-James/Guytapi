@@ -233,7 +233,3 @@ class YoutubeApiGUI:
         textbox.insert('end', text)
         textbox.config(state = state)
         return textbox
-
-if __name__ == "__main__":
-    ytapigui = YoutubeApiGUI()
-    ytapigui.run()
