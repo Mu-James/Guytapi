@@ -65,6 +65,20 @@ class YoutubeApiGUI:
     def run(self):
         self._root_window.mainloop()
 
+    def _open_api_selection(self):
+        self._window_api_selection = self._create_top_level_window(self._window_input_data_api_key, _WINDOW_TITLE_API_SELECTION, _DEFAULT_RESOLUTION)
+        self._window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_input_data_api_key.withdraw()
+
+        #Labels
+        selection = self._create_label(self._window_api_selection, _LABEL_TEXT_API_SELECTION, 0, 0)
+
+        #Buttons
+        select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
+        select_playlists = self._create_button(self._window_api_selection, _BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
+        select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
+        back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._open_input_data_api_key))
+
     def _open_input_data_api_key(self):
         self._window_input_data_api_key = self._create_top_level_window(self._root_window, _WINDOW_TITLE_ENTER_DATA_API_KEY, _DEFAULT_RESOLUTION)
         self._window_input_data_api_key.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
@@ -94,32 +108,6 @@ class YoutubeApiGUI:
         #Buttons
         submit_key = self._create_button(self._window_input_data_api_key, _BUTTON_TEXT_GO, 3, 0, lambda: _submit_key(self, key_entry.get()))
         back = self._create_button(self._window_input_data_api_key, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_input_data_api_key, self._root_window))
-
-    def _open_api_selection(self):
-        self._window_api_selection = self._create_top_level_window(self._window_input_data_api_key, _WINDOW_TITLE_API_SELECTION, _DEFAULT_RESOLUTION)
-        self._window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
-        self._window_input_data_api_key.withdraw()
-
-        #Labels
-        selection = self._create_label(self._window_api_selection, _LABEL_TEXT_API_SELECTION, 0, 0)
-
-        #Buttons
-        select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
-        select_playlists = self._create_button(self._window_api_selection, _BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
-        select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
-        back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._open_input_data_api_key))
-
-    def _open_non_api_selection(self):
-        self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION, _DEFAULT_RESOLUTION)
-        self._window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
-        self._root_window.withdraw()
-
-        #Labels
-        selection = self._create_label(self._window_non_api_selection, _LABEL_TEXT_NON_API_SELECTION, 0, 0)
-
-        #Buttons
-        select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
-        back = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
 
     def _open_videos_selection(self):
         self._videos_selection = self._create_top_level_window(self._window_api_selection, _WINDOW_TITLE_VIDEOS_SELECTION, _DEFAULT_RESOLUTION)
@@ -165,6 +153,18 @@ class YoutubeApiGUI:
 
         #Buttons
         submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
+
+    def _open_non_api_selection(self):
+        self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION, _DEFAULT_RESOLUTION)
+        self._window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
+        self._root_window.withdraw()
+
+        #Labels
+        selection = self._create_label(self._window_non_api_selection, _LABEL_TEXT_NON_API_SELECTION, 0, 0)
+
+        #Buttons
+        select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
+        back = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
@@ -233,3 +233,7 @@ class YoutubeApiGUI:
         textbox.insert('end', text)
         textbox.config(state = state)
         return textbox
+
+if __name__ == "__main__":
+    ytapigui = YoutubeApiGUI()
+    ytapigui.run()
