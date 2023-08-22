@@ -3,45 +3,7 @@ from tkinter import messagebox
 import youtube_video as yv
 import personal as p
 import verify as v
-
-_DELETE_WINDOW_PROTCOL = "WM_DELETE_WINDOW",
-
-_LABEL_TEXT_WELCOME = "Welcome, please choose an option below:"
-_LABEL_TEXT_ENTER_DATA_API_KEY = "Please enter your Youtube Data API Key below:"
-_LABEL_TEXT_API_SELECTION = "Please select an API category below:"
-_LABEL_TEXT_NON_API_SELECTION = "Please select an option below:"
-_LABEL_TEXT_VIDEOS_SELECTION = "Please select an action below:"
-_LABEL_TEXT_ENTER_VIDEO_URL = "Enter a Youtube Video URL"
-_LABEL_TEXT_SELECT_THUMBNAIL_SIZE = "Select a thumbnail size"
-
-_BUTTON_TEXT_API_RELATED = "API Related"
-_BUTTON_TEXT_NON_API_RELATED = "Non-API Related"
-_BUTTON_TEXT_CLOSE = "Close"
-_BUTTON_TEXT_VIDEOS = "Videos"
-_BUTTON_TEXT_CHANNELS = "Channels"
-_BUTTON_TEXT_PLAYLISTS = "Playlists"
-_BUTTON_TEXT_EXTRACT_IDS = "Extract IDs"
-_BUTTON_TEXT_BACK = "Back"
-_BUTTON_TEXT_GET_THUMBNAIL_URL = "Get Thumbnail URL"
-_BUTTON_TEXT_GO = "Go"
-
-_DROPDOWN_TEXT_DEFAULT = "Default"
-_DROPDOWN_TEXT_MEDIUM = "Medium"
-_DROPDOWN_TEXT_HIGH = "High"
-_DROPDOWN_TEXT_STANDARD = "Standard"
-
-_MESSAGEBOX_TITLE_CONFIRM_CLOSE = "Close Youtube API GUI?"
-_MESSAGEBOX_MESSAGE_CONFIRM_CLOSE = "Are you sure you want to close Youtube API GUI?"
-
-_WINDOW_TITLE_API_SELECTION = "Youtube API GUI: API Selection"
-_WINDOW_TITLE_ENTER_DATA_API_KEY = "Youtube API GUI: Enter API Key"
-_WINDOW_TITLE_NON_API_SELECTION = "Youtube API GUI: Non-API Selection"
-_WINDOW_TITLE_VIDEOS_SELECTION = "Youtube API GUI: Videos"
-_WINDOW_TITLE_GET_THUMBNAIL_URL = "Youtube API GUI: Video Thumbnail URL"
-
-_WINDOW_TITLE_ROOT = "Youtube API GUI"
-_DEFAULT_RESOLUTION = "512x512"
-_DEFAULT_FONT = "Arial"
+from text import *
 
 def _dummy():
     pass
@@ -49,39 +11,39 @@ def _dummy():
 class YoutubeApiGUI:
     def __init__(self):
         self._root_window = tk.Tk()
-        self._root_window.title(_WINDOW_TITLE_ROOT)
-        self._root_window.geometry(_DEFAULT_RESOLUTION)
-        self._root_window.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._root_window.title(WINDOW_TITLE_ROOT)
+        self._root_window.geometry(DEFAULT_RESOLUTION)
+        self._root_window.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._yt_api_key = None
 
         #Labels
-        welcome = self._create_label(self._root_window, _LABEL_TEXT_WELCOME, 0, 0)
+        welcome = self._create_label(self._root_window, LABEL_TEXT_WELCOME, 0, 0)
 
         #Buttons
-        api_related = self._create_button(self._root_window, _BUTTON_TEXT_API_RELATED, 1, 0, self._open_input_data_api_key)
-        non_api_realted = self._create_button(self._root_window, _BUTTON_TEXT_NON_API_RELATED, 2, 0, self._open_non_api_selection)
-        close = self._create_button(self._root_window, _BUTTON_TEXT_CLOSE, 3, 0, self._confirm_close_GUI)
+        api_related = self._create_button(self._root_window, BUTTON_TEXT_API_RELATED, 1, 0, self._open_input_data_api_key)
+        non_api_realted = self._create_button(self._root_window, BUTTON_TEXT_NON_API_RELATED, 2, 0, self._open_non_api_selection)
+        close = self._create_button(self._root_window, BUTTON_TEXT_CLOSE, 3, 0, self._confirm_close_GUI)
         
     def run(self):
         self._root_window.mainloop()
 
     def _open_api_selection(self):
-        self._window_api_selection = self._create_top_level_window(self._window_input_data_api_key, _WINDOW_TITLE_API_SELECTION, _DEFAULT_RESOLUTION)
-        self._window_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_api_selection = self._create_top_level_window(self._window_input_data_api_key, WINDOW_TITLE_API_SELECTION, DEFAULT_RESOLUTION)
+        self._window_api_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._window_input_data_api_key.withdraw()
 
         #Labels
-        selection = self._create_label(self._window_api_selection, _LABEL_TEXT_API_SELECTION, 0, 0)
+        selection = self._create_label(self._window_api_selection, LABEL_TEXT_API_SELECTION, 0, 0)
 
         #Buttons
-        select_channels = self._create_button(self._window_api_selection, _BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
-        select_playlists = self._create_button(self._window_api_selection, _BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
-        select_videos = self._create_button(self._window_api_selection, _BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
-        back = self._create_button(self._window_api_selection, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._open_input_data_api_key))
+        select_channels = self._create_button(self._window_api_selection, BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
+        select_playlists = self._create_button(self._window_api_selection, BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
+        select_videos = self._create_button(self._window_api_selection, BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
+        back = self._create_button(self._window_api_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._open_input_data_api_key))
 
     def _open_input_data_api_key(self):
-        self._window_input_data_api_key = self._create_top_level_window(self._root_window, _WINDOW_TITLE_ENTER_DATA_API_KEY, _DEFAULT_RESOLUTION)
-        self._window_input_data_api_key.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_input_data_api_key = self._create_top_level_window(self._root_window, WINDOW_TITLE_ENTER_DATA_API_KEY, DEFAULT_RESOLUTION)
+        self._window_input_data_api_key.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._root_window.withdraw()
 
         invalid_key = None
@@ -100,25 +62,25 @@ class YoutubeApiGUI:
                 invalid_key = self._create_label(self._window_input_data_api_key, verify, 2, 0)
 
         #Labels
-        enter_label = self._create_label(self._window_input_data_api_key, _LABEL_TEXT_ENTER_DATA_API_KEY, 0, 0)
+        enter_label = self._create_label(self._window_input_data_api_key, LABEL_TEXT_ENTER_DATA_API_KEY, 0, 0)
 
         #Entries
         key_entry = self._create_entry(self._window_input_data_api_key, 50, 1, 0)
 
         #Buttons
-        submit_key = self._create_button(self._window_input_data_api_key, _BUTTON_TEXT_GO, 3, 0, lambda: _submit_key(self, key_entry.get()))
-        back = self._create_button(self._window_input_data_api_key, _BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_input_data_api_key, self._root_window))
+        submit_key = self._create_button(self._window_input_data_api_key, BUTTON_TEXT_GO, 3, 0, lambda: _submit_key(self, key_entry.get()))
+        back = self._create_button(self._window_input_data_api_key, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_input_data_api_key, self._root_window))
 
     def _open_videos_selection(self):
-        self._videos_selection = self._create_top_level_window(self._window_api_selection, _WINDOW_TITLE_VIDEOS_SELECTION, _DEFAULT_RESOLUTION)
-        self._videos_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._videos_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_VIDEOS_SELECTION, DEFAULT_RESOLUTION)
+        self._videos_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._window_api_selection.withdraw()
 
         #Labels
-        selection = self._create_label(self._videos_selection, _LABEL_TEXT_VIDEOS_SELECTION, 0, 0)
+        selection = self._create_label(self._videos_selection, LABEL_TEXT_VIDEOS_SELECTION, 0, 0)
 
         #Buttons
-        get_video_thumbnail_url = self._create_button(self._videos_selection, _BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
+        get_video_thumbnail_url = self._create_button(self._videos_selection, BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
 
     def _get_thumbnail_url(self):
         self._thumbnail_url = self._create_top_level_window(self._videos_selection, _WINDOW_TITLE_GET_THUMBNAIL_URL, _DEFAULT_RESOLUTION)
@@ -155,16 +117,19 @@ class YoutubeApiGUI:
         submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
 
     def _open_non_api_selection(self):
-        self._window_non_api_selection = self._create_top_level_window(self._root_window, _WINDOW_TITLE_NON_API_SELECTION, _DEFAULT_RESOLUTION)
-        self._window_non_api_selection.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
+        self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
+        self._window_non_api_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
         self._root_window.withdraw()
 
         #Labels
-        selection = self._create_label(self._window_non_api_selection, _LABEL_TEXT_NON_API_SELECTION, 0, 0)
+        selection = self._create_label(self._window_non_api_selection, LABEL_TEXT_NON_API_SELECTION, 0, 0)
 
         #Buttons
-        select_extract_ids = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
-        back = self._create_button(self._window_non_api_selection, _BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
+        select_extract_ids = self._create_button(self._window_non_api_selection, BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
+        back = self._create_button(self._window_non_api_selection, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
+        
+    def _extract_ids(self):
+        self._window_extract_id_selection = self._create_top_level_window(self._window_non_api_selection, )
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
@@ -172,7 +137,7 @@ class YoutubeApiGUI:
 
     def _confirm_close_GUI(self):
         #response = tk.messagebox.askyesno(_MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
-        response = self._create_messagebox("askyesno", _MESSAGEBOX_TITLE_CONFIRM_CLOSE, _MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
+        response = self._create_messagebox("askyesno", MESSAGEBOX_TITLE_CONFIRM_CLOSE, MESSAGEBOX_MESSAGE_CONFIRM_CLOSE)
         if response == True:
             self._root_window.destroy()
         elif response == False:
@@ -181,7 +146,7 @@ class YoutubeApiGUI:
     def _create_button(self, master, text, row, column, command):
         button = tk.Button(
             master = master,
-            text = text, font = _DEFAULT_FONT,
+            text = text, font = DEFAULT_FONT,
             command = command
         )
         button.grid(
