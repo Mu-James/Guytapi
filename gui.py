@@ -118,6 +118,7 @@ class YoutubeApiGUI:
 
         #Buttons
         submit_inputs = self._create_button(self._thumbnail_url, BUTTON_TEXT_GO, 2, 0, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
+        back = self._create_button(self._thumbnail_url, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._thumbnail_url, self._videos_selection))
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
