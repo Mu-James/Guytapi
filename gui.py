@@ -5,6 +5,7 @@ import personal as p
 import verify as v
 import extract as e
 from text import *
+from defaults import *
 
 def _dummy():
     pass
