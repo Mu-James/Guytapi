@@ -160,6 +160,7 @@ class YoutubeApiGUI:
 
         #Buttons
         submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 1, lambda: _submit_playlist_url(playlist_url_entry.get()))
+        back = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_playlist_id, self._window_extract_id_selection))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
