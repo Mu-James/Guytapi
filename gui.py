@@ -169,7 +169,7 @@ class YoutubeApiGUI:
 
         def _submit_channel_url(channel_url):
             channel_id = e.extract_youtube_channel_id_from_url(channel_url)
-            result = self._create_button(self._window_extract_channel_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, channel_id, DEFAULT_TEXTBOX_STATE)
+            result = self._create_textbox(self._window_extract_channel_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, channel_id, DEFAULT_TEXTBOX_STATE)
 
         #Labels
         enter_channel_url = self._create_label(self._window_extract_channel_id, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
