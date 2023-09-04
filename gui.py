@@ -185,7 +185,7 @@ class YoutubeApiGUI:
     def _extract_video_id(self):
         self._window_extract_video_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_VIDEO_ID, DEFAULT_RESOLUTION)
         self._window_extract_video_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
-        self._window_extract_video_id_.withdraw()
+        self._window_extract_id_selection.withdraw()
 
         def _submit_video_url(video_url):
             video_id = e.extract_youtube_video_id_from_url(video_url)
