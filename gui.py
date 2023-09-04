@@ -81,6 +81,7 @@ class YoutubeApiGUI:
 
         #Buttons
         get_video_thumbnail_url = self._create_button(self._videos_selection, BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
+        back = self._create_button(self._videos_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._videos_selection, self._window_api_selection))
 
     def _get_thumbnail_url(self):
         self._thumbnail_url = self._create_top_level_window(self._videos_selection, WINDOW_TITLE_GET_THUMBNAIL_URL, DEFAULT_RESOLUTION)
