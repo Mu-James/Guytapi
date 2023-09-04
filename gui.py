@@ -199,7 +199,7 @@ class YoutubeApiGUI:
 
         #Buttons
         submit_video_url = self._create_button(self._window_extract_video_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_video_url(video_url_entry.get()))
-        back = self._create_button(self._button_extract_channel_id, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_extract_video_id, self._window_extract_id_selection))
+        back = self._create_button(self._window_extract_video_id, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_extract_video_id, self._window_extract_id_selection))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
