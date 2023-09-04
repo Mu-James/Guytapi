@@ -94,7 +94,7 @@ class YoutubeApiGUI:
         def _submit_inputs(video_url, size, yt_api_key):
             nonlocal tb_url
             tb_url = yv.get_video_thumbnail_url_url(video_url, size, yt_api_key)
-            result = self._create_textbox(self._thumbnail_url, 1, 50, 3, 1, tb_url, 'disabled')
+            result = self._create_textbox(self._thumbnail_url, 1, 50, 2, 1, tb_url, 'disabled')
 
         #Labels
         url_entry_label = self._create_label(self._thumbnail_url, LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
@@ -116,7 +116,7 @@ class YoutubeApiGUI:
         size_drop.grid(row = 1, column = 1)
 
         #Buttons
-        submit_inputs = self._create_button(self._thumbnail_url, BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
+        submit_inputs = self._create_button(self._thumbnail_url, BUTTON_TEXT_GO, 2, 0, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
@@ -150,7 +150,7 @@ class YoutubeApiGUI:
 
         def _submit_playlist_url(playlist_url): 
             playlist_id = e.extract_youtube_playlist_id_from_url(playlist_url)
-            result = self._create_textbox(self._window_extract_playlist_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 2, 1, playlist_id, DEFAULT_TEXTBOX_STATE)
+            result = self._create_textbox(self._window_extract_playlist_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, playlist_id, DEFAULT_TEXTBOX_STATE)
 
         #Labels
         enter_playlist_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_PLAYLIST_URL, 0, 0)
@@ -159,8 +159,8 @@ class YoutubeApiGUI:
         playlist_url_entry = self._create_entry(self._window_extract_playlist_id, 50, 0, 1)
 
         #Buttons
-        submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 1, lambda: _submit_playlist_url(playlist_url_entry.get()))
-        back = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_BACK, 3, 1, lambda: self._back_to_previous_window(self._window_extract_playlist_id, self._window_extract_id_selection))
+        submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_playlist_url(playlist_url_entry.get()))
+        back = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_playlist_id, self._window_extract_id_selection))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
