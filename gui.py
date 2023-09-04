@@ -141,7 +141,8 @@ class YoutubeApiGUI:
         #Buttons
         playlist_id =  self._create_button(self._window_extract_id_selection, BUTTON_TEXT_PLAYLISTS, 1, 0, lambda: self._extract_playlist_id())
         channel_id = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_CHANNELS, 2, 0, lambda: self._extract_channel_id())
-        back = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_id_selection, self._window_non_api_selection))
+        video_id = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_VIDEOS, 3, 0, lambda: self._extract_video_id())
+        back = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_extract_id_selection, self._window_non_api_selection))
 
     def _extract_playlist_id(self):
         self._window_extract_playlist_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_PLAYLIST_ID, DEFAULT_RESOLUTION)
@@ -179,8 +180,26 @@ class YoutubeApiGUI:
 
         #Buttons
         submit_channel_url = self._create_button(self._window_extract_channel_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_channel_url(channel_url_entry.get()))
-        back = self._create_button(self._window_extract_channel_id, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_channel_id, self._window_extract_id_selection))
+        back = self._create_button(self._window_extract_channel_id, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_extract_channel_id, self._window_extract_id_selection))
 
+    def _extract_video_id(self):
+        self._window_extract_video_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_VIDEO_ID, DEFAULT_RESOLUTION)
+        self._window_extract_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_extract_id_selection.withdraw()
+
+        def _submit_video_url(video_url):
+            video_id = e.extract_youtube_video_id_from_url(video_url)
+            result = self._create_textbox(self._window_extract_video_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, video_id, DEFAULT_TEXTBOX_STATE)
+
+        #Labels
+        enter_video_url = self._create_label(self._window_extract_video_id, LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
+
+        #Entries
+        video_url_entry = self._create_entry(self._window_extract_video_id, DEFAULT_ENTRY_SIZE, 0, 1)
+
+        #Buttons
+        submit_video_url = self._create_button(self._window_extract_video_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_video_url(video_url_entry.get()))
+        back = self._create_button(self._button_extract_channel_id, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_extract_video_id, self._window_extract_id_selection))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
