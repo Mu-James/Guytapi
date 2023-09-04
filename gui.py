@@ -140,7 +140,7 @@ class YoutubeApiGUI:
 
         #Buttons
         playlist_id =  self._create_button(self._window_extract_id_selection, BUTTON_TEXT_PLAYLISTS, 1, 0, lambda: self._extract_playlist_id())
-        channel_id = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_CHANNELS, 2, 0, _dummy)
+        channel_id = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_CHANNELS, 2, 0, lambda: self._extract_channel_id())
         back = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_id_selection, self._window_non_api_selection))
 
     def _extract_playlist_id(self):
