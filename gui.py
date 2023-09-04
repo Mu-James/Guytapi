@@ -3,6 +3,7 @@ from tkinter import messagebox
 import youtube_video as yv
 import personal as p
 import verify as v
+import extract as e
 from text import *
 
 def _dummy():
@@ -126,11 +127,39 @@ class YoutubeApiGUI:
         selection = self._create_label(self._window_non_api_selection, LABEL_TEXT_NON_API_SELECTION, 0, 0)
 
         #Buttons
-        select_extract_ids = self._create_button(self._window_non_api_selection, BUTTON_TEXT_EXTRACT_IDS, 1, 0, _dummy)
+        select_extract_ids = self._create_button(self._window_non_api_selection, BUTTON_TEXT_EXTRACT_IDS, 1, 0, lambda: self._extract_ids())
         back = self._create_button(self._window_non_api_selection, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_non_api_selection, self._root_window))
         
     def _extract_ids(self):
-        self._window_extract_id_selection = self._create_top_level_window(self._window_non_api_selection, )
+        self._window_extract_id_selection = self._create_top_level_window(self._window_non_api_selection, WINDOW_TITLE_EXTRACT_IDS_SELECTION, DEFAULT_RESOLUTION)
+        self._window_extract_id_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_non_api_selection.withdraw()
+
+        #Labels
+        selection = self._create_label(self._window_extract_id_selection, LABEL_TEXT_SELECT_EXTRACT_ID, 0, 0)
+
+        #Buttons
+        playlist_id =  self._create_button(self._window_extract_id_selection, BUTTON_TEXT_PLAYLISTS, 1, 0, _dummy)
+        channel_id = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_CHANNELS, 2, 0, _dummy)
+        back = self._create_button(self._window_extract_id_selection, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_id_selection, self._window_non_api_selection))
+
+    def _extract_playlist_id(self):
+        self._window_extract_playlist_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_PLAYLIST_ID)
+        self._window_extract_playlist_id.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_extract_id_selection.withdraw()
+
+        def _submit_playlist_url(playlist_url): 
+            playlist_id = e.extract_youtube_playlist_id_from_url(playlist_url)
+            result = self._create_textbox(self._window_extract_playlist_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 2, playlist_id, DEFAULT_TEXTBOX_STATE)
+
+        #Labels
+        enter_playlist_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_PLAYLIST_URL, 0, 0)
+
+        #Entries
+        playlist_url_entry = self._create_entry(self._window_extract_playlist_id, 50, 0, 1)
+
+        #Buttons
+        submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 1, lambda: _submit_playlist_url(playlist_url_entry.get()))
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()
