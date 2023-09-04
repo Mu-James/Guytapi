@@ -172,7 +172,7 @@ class YoutubeApiGUI:
             result = self._create_button(self._window_extract_channel_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, channel_id, DEFAULT_TEXTBOX_STATE)
 
         #Labels
-        enter_channel_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
+        enter_channel_url = self._create_label(self._window_extract_channel_id, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
 
         #Entries
         channel_url_entry = self._create_entry(self._window_extract_channel_id, DEFAULT_ENTRY_SIZE, 0, 1)
