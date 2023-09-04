@@ -66,7 +66,7 @@ class YoutubeApiGUI:
         enter_label = self._create_label(self._window_input_data_api_key, LABEL_TEXT_ENTER_DATA_API_KEY, 0, 0)
 
         #Entries
-        key_entry = self._create_entry(self._window_input_data_api_key, 50, 1, 0)
+        key_entry = self._create_entry(self._window_input_data_api_key, DEFAULT_ENTRY_SIZE, 1, 0)
 
         #Buttons
         submit_key = self._create_button(self._window_input_data_api_key, BUTTON_TEXT_GO, 3, 0, lambda: _submit_key(self, key_entry.get()))
@@ -156,7 +156,7 @@ class YoutubeApiGUI:
         enter_playlist_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_PLAYLIST_URL, 0, 0)
 
         #Entries
-        playlist_url_entry = self._create_entry(self._window_extract_playlist_id, 50, 0, 1)
+        playlist_url_entry = self._create_entry(self._window_extract_playlist_id, DEFAULT_ENTRY_SIZE, 0, 1)
 
         #Buttons
         submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_playlist_url(playlist_url_entry.get()))
@@ -166,6 +166,12 @@ class YoutubeApiGUI:
         self._window_extract_channel_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_CHANNEL_ID, DEFAULT_RESOLUTION)
         self._window_extract_channel_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_extract_id_selection.withdraw()
+
+        #Labels
+        enter_channel_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
+
+        #Entries
+        channel_url_entry = self._create_entry(self._window_extract_channel_id, DEFAULT_ENTRY_SIZE, 0, 1)
 
 
     def _back_to_previous_window(self, current, previous):
