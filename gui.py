@@ -167,11 +167,19 @@ class YoutubeApiGUI:
         self._window_extract_channel_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_extract_id_selection.withdraw()
 
+        def _submit_channel_url(channel_url):
+            channel_id = e.extract_youtube_channel_id_from_url(channel_url)
+            result = self._create_button(self._window_extract_channel_id, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, channel_id, DEFAULT_TEXTBOX_STATE)
+
         #Labels
         enter_channel_url = self._create_label(self._window_extract_playlist_id, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
 
         #Entries
         channel_url_entry = self._create_entry(self._window_extract_channel_id, DEFAULT_ENTRY_SIZE, 0, 1)
+
+        #Buttons
+        submit_channel_url = self._create_button(self._extract_channel_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_channel_url(channel_url_entry.get()))
+        back = self._create_button(self._window_extract_channel_id, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_channel_id, self._window_extract_id_selection))
 
 
     def _back_to_previous_window(self, current, previous):
