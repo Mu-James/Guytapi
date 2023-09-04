@@ -83,8 +83,8 @@ class YoutubeApiGUI:
         get_video_thumbnail_url = self._create_button(self._videos_selection, BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
 
     def _get_thumbnail_url(self):
-        self._thumbnail_url = self._create_top_level_window(self._videos_selection, _WINDOW_TITLE_GET_THUMBNAIL_URL, _DEFAULT_RESOLUTION)
-        self._thumbnail_url.protocol(_DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._thumbnail_url = self._create_top_level_window(self._videos_selection, WINDOW_TITLE_GET_THUMBNAIL_URL, DEFAULT_RESOLUTION)
+        self._thumbnail_url.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
         self._videos_selection.withdraw()
 
         tb_url = None
@@ -95,8 +95,8 @@ class YoutubeApiGUI:
             result = self._create_textbox(self._thumbnail_url, 1, 50, 3, 1, tb_url, 'disabled')
 
         #Labels
-        url_entry_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
-        select_size_label = self._create_label(self._thumbnail_url, _LABEL_TEXT_SELECT_THUMBNAIL_SIZE, 1, 0)
+        url_entry_label = self._create_label(self._thumbnail_url, LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
+        select_size_label = self._create_label(self._thumbnail_url, LABEL_TEXT_SELECT_THUMBNAIL_SIZE, 1, 0)
 
         #Entries
         url_entry = self._create_entry(self._thumbnail_url, 50, 0, 1)
@@ -104,17 +104,17 @@ class YoutubeApiGUI:
         #Dropdown
         size_var = tk.StringVar()
         sizes = [
-            _DROPDOWN_TEXT_DEFAULT,
-            _DROPDOWN_TEXT_MEDIUM,
-            _DROPDOWN_TEXT_HIGH,
-            _DROPDOWN_TEXT_STANDARD
+            DROPDOWN_TEXT_DEFAULT,
+            DROPDOWN_TEXT_MEDIUM,
+            DROPDOWN_TEXT_HIGH,
+            DROPDOWN_TEXT_STANDARD
         ]
         size_var.set(sizes[0])
         size_drop = tk.OptionMenu(self._thumbnail_url, size_var, *sizes)
         size_drop.grid(row = 1, column = 1)
 
         #Buttons
-        submit_inputs = self._create_button(self._thumbnail_url, _BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
+        submit_inputs = self._create_button(self._thumbnail_url, BUTTON_TEXT_GO, 2, 1, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
@@ -198,7 +198,3 @@ class YoutubeApiGUI:
         textbox.insert('end', text)
         textbox.config(state = state)
         return textbox
-
-if __name__ == "__main__":
-    ytapigui = YoutubeApiGUI()
-    ytapigui.run()
