@@ -14,7 +14,7 @@ class YoutubeApiGUI:
         self._root_window = tk.Tk()
         self._root_window.title(WINDOW_TITLE_ROOT)
         self._root_window.geometry(DEFAULT_RESOLUTION)
-        self._root_window.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._root_window.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._yt_api_key = None
 
         #Labels
@@ -30,7 +30,7 @@ class YoutubeApiGUI:
 
     def _open_api_selection(self):
         self._window_api_selection = self._create_top_level_window(self._window_input_data_api_key, WINDOW_TITLE_API_SELECTION, DEFAULT_RESOLUTION)
-        self._window_api_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_api_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_input_data_api_key.withdraw()
 
         #Labels
@@ -44,7 +44,7 @@ class YoutubeApiGUI:
 
     def _open_input_data_api_key(self):
         self._window_input_data_api_key = self._create_top_level_window(self._root_window, WINDOW_TITLE_ENTER_DATA_API_KEY, DEFAULT_RESOLUTION)
-        self._window_input_data_api_key.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_input_data_api_key.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._root_window.withdraw()
 
         invalid_key = None
@@ -74,7 +74,7 @@ class YoutubeApiGUI:
 
     def _open_videos_selection(self):
         self._videos_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_VIDEOS_SELECTION, DEFAULT_RESOLUTION)
-        self._videos_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._videos_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_api_selection.withdraw()
 
         #Labels
@@ -86,7 +86,7 @@ class YoutubeApiGUI:
 
     def _get_thumbnail_url(self):
         self._thumbnail_url = self._create_top_level_window(self._videos_selection, WINDOW_TITLE_GET_THUMBNAIL_URL, DEFAULT_RESOLUTION)
-        self._thumbnail_url.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._thumbnail_url.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._videos_selection.withdraw()
 
         tb_url = None
@@ -120,7 +120,7 @@ class YoutubeApiGUI:
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
-        self._window_non_api_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI )
+        self._window_non_api_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI )
         self._root_window.withdraw()
 
         #Labels
@@ -132,7 +132,7 @@ class YoutubeApiGUI:
         
     def _extract_ids(self):
         self._window_extract_id_selection = self._create_top_level_window(self._window_non_api_selection, WINDOW_TITLE_EXTRACT_IDS_SELECTION, DEFAULT_RESOLUTION)
-        self._window_extract_id_selection.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_extract_id_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_non_api_selection.withdraw()
 
         #Labels
@@ -145,7 +145,7 @@ class YoutubeApiGUI:
 
     def _extract_playlist_id(self):
         self._window_extract_playlist_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_PLAYLIST_ID, DEFAULT_RESOLUTION)
-        self._window_extract_playlist_id.protocol(DELETE_WINDOW_PROTCOL, self._confirm_close_GUI)
+        self._window_extract_playlist_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._window_extract_id_selection.withdraw()
 
         def _submit_playlist_url(playlist_url): 
@@ -161,6 +161,12 @@ class YoutubeApiGUI:
         #Buttons
         submit_playlist_url = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_GO, 1, 0, lambda: _submit_playlist_url(playlist_url_entry.get()))
         back = self._create_button(self._window_extract_playlist_id, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_extract_playlist_id, self._window_extract_id_selection))
+
+    def _extract_channel_id(self):
+        self._window_extract_channel_id = self._create_top_level_window(self._window_extract_id_selection, WINDOW_TITLE_EXTRACT_CHANNEL_ID, DEFAULT_RESOLUTION)
+        self._window_extract_channel_id.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_extract_id_selection.withdraw()
+
 
     def _back_to_previous_window(self, current, previous):
         current.withdraw()

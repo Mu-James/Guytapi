@@ -1,6 +1,6 @@
 #For use in gui.py
 
-DELETE_WINDOW_PROTCOL = "WM_DELETE_WINDOW",
+DEFAULT_DELETE_WINDOW_PROTOCOL = "WM_DELETE_WINDOW",
 
 LABEL_TEXT_WELCOME = "Welcome, please choose an option below:"
 LABEL_TEXT_ENTER_DATA_API_KEY = "Please enter your Youtube Data API Key below:"
