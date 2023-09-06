@@ -82,6 +82,7 @@ class YoutubeApiGUI:
         selection = self._create_label(self._videos_selection, LABEL_TEXT_VIDEOS_SELECTION, 0, 0)
 
         #Buttons
+        get_video_num_views = self._create_button(self._videos_selection, BUTTON_TEXT_GET_NUM_VIEWS, 2, 0, self._get_video_view_count)
         get_video_thumbnail_url = self._create_button(self._videos_selection, BUTTON_TEXT_GET_THUMBNAIL_URL, 1, 0, self._get_thumbnail_url)
         back = self._create_button(self._videos_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._videos_selection, self._window_api_selection))
 
@@ -119,6 +120,25 @@ class YoutubeApiGUI:
         #Buttons
         submit_inputs = self._create_button(self._thumbnail_url, BUTTON_TEXT_GO, 2, 0, lambda: _submit_inputs(url_entry.get(), size_var.get().lower(), self._yt_api_key))
         back = self._create_button(self._thumbnail_url, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._thumbnail_url, self._videos_selection))
+
+    def _get_video_view_count(self):
+        self._window_video_get_num_views = self._create_top_level_window(self._videos_selection, WINDOW_TITLE_VIDEO_GET_NUM_VIEWS, DEFAULT_RESOLUTION)
+        self._window_video_get_num_views.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._videos_selection.withdraw()
+
+        def _submit_video_url(video_url, yt_api_key):
+            view_count = yv.get_video_view_count_url(video_url, yt_api_key)
+            result = self._create_textbox(self._window_video_get_num_views, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, view_count, DEFAULT_TEXTBOX_STATE)
+
+        #Labels
+        enter_video_url = self._create_label(self._window_video_get_num_views, LABEL_TEXT_ENTER_VIDEO_URL, 0, 0)
+
+        #Entries
+        channel_url_entry = self._create_entry(self._window_video_get_num_views, DEFAULT_ENTRY_SIZE, 0, 1)
+
+        #Buttons
+        submit_video_url = self._create_button(self._window_video_get_num_views, BUTTON_TEXT_GO, 1, 0, lambda: _submit_video_url(channel_url_entry.get(), self._yt_api_key))
+        back = self._create_button(self._window_video_get_num_views, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_video_get_num_views, self._videos_selection))
 
     def _open_non_api_selection(self):
         self._window_non_api_selection = self._create_top_level_window(self._root_window, WINDOW_TITLE_NON_API_SELECTION, DEFAULT_RESOLUTION)
