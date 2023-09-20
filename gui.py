@@ -83,6 +83,7 @@ class YoutubeApiGUI:
 
         #Buttons
         get_channel_stats = self._create_button(self._window_channels_selection, BUTTON_TEXT_GET_STATS, 1, 0, _dummy)
+        back = self._create_button(self._window_channels_selection, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_channels_selection, self._window_api_selection))
 
 
     def _open_videos_selection(self):
