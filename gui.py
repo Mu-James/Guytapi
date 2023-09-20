@@ -19,6 +19,7 @@ class YoutubeApiGUI:
         self._root_window.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
         self._yt_api_key = None
 
+        self._CHANNEL_STATISTICS_TEXTBOX_HEIGHT = 5
         #Labels
         welcome = self._create_label(self._root_window, LABEL_TEXT_WELCOME, 0, 0)
 
@@ -93,7 +94,7 @@ class YoutubeApiGUI:
 
         def _submit_channel_url(channel_url, yt_api_key):
             stats_string = yc.get_parsed_channel_statistics_response(yc.get_channel_statistics_url(channel_url, yt_api_key))
-            result = self._create_textbox(self._window_get_channel_stats, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, stats_string, DEFAULT_TEXTBOX_STATE)
+            result = self._create_textbox(self._window_get_channel_stats, self._CHANNEL_STATISTICS_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, stats_string, DEFAULT_TEXTBOX_STATE)
 
         #Labels
         enter_channel_url = self._create_label(self._window_get_channel_stats, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
