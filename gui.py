@@ -73,6 +73,18 @@ class YoutubeApiGUI:
         submit_key = self._create_button(self._window_input_data_api_key, BUTTON_TEXT_GO, 3, 0, lambda: _submit_key(self, key_entry.get()))
         back = self._create_button(self._window_input_data_api_key, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_input_data_api_key, self._root_window))
 
+    def _open_channels_selection(self):
+        self._window_channels_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_CHANNELS_SELECTION, DEFAULT_RESOLUTION)
+        self._window_channels_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_api_selection.withdraw()
+
+        #Labels
+        selection = self._create_label(self._window_channels_selection, LABEL_TEXT_SELECT_OPTION_BELOW, 0, 0)
+
+        #Buttons
+        get_channel_stats = self._create_button(self._window_channels_selection, BUTTON_TEXT_GET_STATS, 1, 0, _dummy)
+
+
     def _open_videos_selection(self):
         self._videos_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_VIDEOS_SELECTION, DEFAULT_RESOLUTION)
         self._videos_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
