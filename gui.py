@@ -38,7 +38,7 @@ class YoutubeApiGUI:
         selection = self._create_label(self._window_api_selection, LABEL_TEXT_API_SELECTION, 0, 0)
 
         #Buttons
-        select_channels = self._create_button(self._window_api_selection, BUTTON_TEXT_CHANNELS, 1, 0, _dummy)
+        select_channels = self._create_button(self._window_api_selection, BUTTON_TEXT_CHANNELS, 1, 0, self._open_channels_selection)
         select_playlists = self._create_button(self._window_api_selection, BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
         select_videos = self._create_button(self._window_api_selection, BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
         back = self._create_button(self._window_api_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._window_input_data_api_key))
