@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import youtube_video as yv
+import youtube_channel as yc
 import personal as p
 import verify as v
 import extract as e
@@ -84,6 +85,25 @@ class YoutubeApiGUI:
         #Buttons
         get_channel_stats = self._create_button(self._window_channels_selection, BUTTON_TEXT_GET_STATS, 1, 0, _dummy)
         back = self._create_button(self._window_channels_selection, BUTTON_TEXT_BACK, 2, 0, lambda: self._back_to_previous_window(self._window_channels_selection, self._window_api_selection))
+
+    def _get_channel_stats(self):
+        self._window_get_channel_stats = self._create_top_level_window(self._window_channels_selection, WINDOW_TITLE_GET_CHANNEL_STATS, DEFAULT_RESOLUTION)
+        self._window_get_channel_stats.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_channels_selection.withdraw()
+
+        def _submit_channel_url(channel_url, yt_api_key):
+            stats_string = yc.get_parsed_channel_statistics_response(yc.get_channel_statistics_url(channel_url, yt_api_key))
+            result = self._create_textbox(self._window_get_channel_stats, DEFAULT_TEXTBOX_HEIGHT, DEFAULT_TEXTBOX_WIDTH, 1, 1, stats_string, DEFAULT_TEXTBOX_STATE)
+
+        #Labels
+        enter_channel_url = self._create_label(self._window_get_channel_stats, LABEL_TEXT_ENTER_CHANNEL_URL, 0, 0)
+
+        #Entries
+        channel_url_entry = self._create_entry(self._window_get_channel_stats, DEFAULT_ENTRY_SIZE, 0, 1)
+
+        #Buttons
+        submit_channel_url = self._create_button(self._window_get_channel_stats, BUTTON_TEXT_GO, 1, 0, lambda: _submit_channel_url(channel_url_entry.get(), self._yt_api_key))
+        back = self._create_button(self._window_get_channel_stats, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_get_channel_stats, self._window_channels_selection))
 
 
     def _open_videos_selection(self):
