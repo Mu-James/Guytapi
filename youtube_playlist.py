@@ -1,8 +1,7 @@
-import personal
 import extract as e
 from build import build_youtube
 
-def get_all_channel_public_playlists_using_id(yt_channel_id, yt_api_key=personal.yt_api_key):
+def get_all_channel_public_playlists_using_id(yt_channel_id, yt_api_key):
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlists().list(
@@ -15,7 +14,7 @@ def get_all_channel_public_playlists_using_id(yt_channel_id, yt_api_key=personal
 
     return response
 
-def get_playlist_data_using_id(playlist_id, yt_api_key=personal.yt_api_key):
+def get_playlist_data_using_id(playlist_id, yt_api_key):
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlists().list(
@@ -27,7 +26,8 @@ def get_playlist_data_using_id(playlist_id, yt_api_key=personal.yt_api_key):
 
     return response
 
-def print_playlist_video_titles_using_id(playlist_id, yt_api_key=personal.yt_api_key):
+def get_parsed_playlist_video_titles_using_id(playlist_id, yt_api_key):
+    titles = ""
     youtube = build_youtube(yt_api_key)
 
     request = youtube.playlistItems().list(
@@ -55,7 +55,9 @@ def print_playlist_video_titles_using_id(playlist_id, yt_api_key=personal.yt_api
         nextPageToken = response.get('nextPageToken')
 
     for video in playlistItems:
-        print(video['snippet']['title'])
+        titles += f"{video['snippet']['title']}\n"
+
+    return titles
 
 def get_all_channel_public_playlists_using_url(url, yt_api_key):
     channel_id = e.extract_youtube_channel_id_from_url(url)
@@ -67,4 +69,4 @@ def get_playlist_data_using_url(url, yt_api_key):
 
 def print_playlist_video_titles_using_url(url, yt_api_key):
     playlist_id = e.extract_youtube_playlist_id_from_url(url)
-    print_playlist_video_titles_using_id(playlist_id, yt_api_key)
+    print(get_parsed_playlist_video_titles_using_id(playlist_id, yt_api_key))
