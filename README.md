@@ -1,8 +1,8 @@
-# Youtube-API-Project
+# Youtube API GUI
 A GUI for utilizing the Youtube API using an API key.
 
 # Features
-## API Related
+For API related features, please have your YouTube Data API key ready. More information can be found [here](https://developers.google.com/youtube/v3/getting-started).
 - Get channel statistics
 - Gather video titles from playlists
 - Find video thumbnail URLs
