@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import scrolledtext
 import youtube_video as yv
 import youtube_channel as yc
+import youtube_playlist as yp
 import personal as p
 import verify as v
 import extract as e
@@ -41,7 +43,7 @@ class YoutubeApiGUI:
 
         #Buttons
         select_channels = self._create_button(self._window_api_selection, BUTTON_TEXT_CHANNELS, 1, 0, self._open_channels_selection)
-        select_playlists = self._create_button(self._window_api_selection, BUTTON_TEXT_PLAYLISTS, 2, 0, _dummy)
+        select_playlists = self._create_button(self._window_api_selection, BUTTON_TEXT_PLAYLISTS, 2, 0, self._open_playlists_selection)
         select_videos = self._create_button(self._window_api_selection, BUTTON_TEXT_VIDEOS, 3, 0, self._open_videos_selection)
         back = self._create_button(self._window_api_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_api_selection, self._window_input_data_api_key))
 
@@ -106,6 +108,46 @@ class YoutubeApiGUI:
         submit_channel_url = self._create_button(self._window_get_channel_stats, BUTTON_TEXT_GO, 1, 0, lambda: _submit_channel_url(channel_url_entry.get(), self._yt_api_key))
         back = self._create_button(self._window_get_channel_stats, BUTTON_TEXT_BACK, 3, 0, lambda: self._back_to_previous_window(self._window_get_channel_stats, self._window_channels_selection))
 
+    def _open_playlists_selection(self):
+        self._window_playlists_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_PLAYLISTS_SELECTION, DEFAULT_RESOLUTION)
+        self._window_playlists_selection.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_api_selection.withdraw()
+
+        #Labels
+        selection = self._create_label(self._window_playlists_selection, LABEL_TEXT_SELECT_OPTION_BELOW, 0, 0)
+
+        #Buttons
+        get_titles_of_playlist = self._create_button(self._window_playlists_selection, BUTTON_TEXT_GET_VIDEO_TITLES, 1, 0, self._get_titles_of_playlist)
+        back = self._create_button(self._window_playlists_selection, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_playlists_selection, self._window_api_selection))
+
+    def _get_titles_of_playlist(self):
+        self._window_get_titles_playlists = self._create_top_level_window(self._window_playlists_selection, WINDOW_TITLE_GET_TITLES_PLAYLISTS, DEFAULT_RESOLUTION)
+        self._window_get_titles_playlists.protocol(DEFAULT_DELETE_WINDOW_PROTOCOL, self._confirm_close_GUI)
+        self._window_playlists_selection.withdraw()
+
+
+        #Scrolled Text
+        result = scrolledtext.ScrolledText(self._window_get_titles_playlists,
+                                               wrap=tk.WORD,
+                                               width=40,
+                                               height=10,
+                                               font=DEFAULT_FONT
+                                                )
+        result.grid(column=1, row=1)
+
+        def _submit_playlist_url(playlist_url, yt_api_key):
+            titles_string = yp.get_parsed_playlist_video_titles_using_url(playlist_url, yt_api_key)
+            result.insert(tk.INSERT, titles_string)
+            
+        #Labels
+        url_entry_label = self._create_label(self._window_get_titles_playlists, LABEL_TEXT_ENTER_PLAYLIST_URL, 0, 0)
+
+        #Entries
+        playlist_url_entry = self._create_entry(self._window_get_titles_playlists, DEFAULT_ENTRY_SIZE, 0, 1)
+
+        #Buttons
+        submit_playlist_url = self._create_button(self._window_get_titles_playlists, BUTTON_TEXT_GO, 1, 0, lambda: _submit_playlist_url(playlist_url_entry.get(), self._yt_api_key))
+        back = self._create_button(self._window_get_titles_playlists, BUTTON_TEXT_BACK, 4, 0, lambda: self._back_to_previous_window(self._window_get_titles_playlists, self._window_playlists_selection))
 
     def _open_videos_selection(self):
         self._videos_selection = self._create_top_level_window(self._window_api_selection, WINDOW_TITLE_VIDEOS_SELECTION, DEFAULT_RESOLUTION)

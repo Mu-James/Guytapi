@@ -59,6 +59,10 @@ def get_parsed_playlist_video_titles_using_id(playlist_id, yt_api_key):
 
     return titles
 
+def get_parsed_playlist_video_titles_using_url(url, yt_api_key):
+    playlist_id = e.extract_youtube_playlist_id_from_url(url)
+    return get_parsed_playlist_video_titles_using_id(playlist_id, yt_api_key)
+
 def get_all_channel_public_playlists_using_url(url, yt_api_key):
     channel_id = e.extract_youtube_channel_id_from_url(url)
     return get_all_channel_public_playlists_using_id(channel_id, yt_api_key)
