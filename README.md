@@ -1,4 +1,4 @@
-# Youtube API GUI
+# Guytapi
 A GUI for utilizing the Youtube API using an API key.
 
 # Features
